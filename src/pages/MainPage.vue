@@ -1,32 +1,28 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" />
+    <RandomRecipes></RandomRecipes>
     <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
-    {{ !$root.store.username }}
-    <RecipePreviewList
-      title="Last Viewed Recipes"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList>
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div>-->
+    <!-- {{ !$root.store.username }} -->
+    <span v-else >
+      <div class="last">last viewed recipes:</div>
+      
+      <LastViewed></LastViewed>
+    </span>
   </div>
 </template>
 
 <script>
+import LastViewed from '../components/LastViewed.vue';
+import RandomRecipes from '../components/RandomRecipes.vue';
 import RecipePreviewList from "../components/RecipePreviewList";
 export default {
+  name:"MainPage",
   components: {
-    RecipePreviewList
-  }
+    // RecipePreviewList,
+    RandomRecipes,
+    LastViewed,
+  },
 };
 </script>
 
@@ -41,5 +37,8 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+.last{
+  font-size: 30px;
 }
 </style>

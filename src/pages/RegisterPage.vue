@@ -90,6 +90,52 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="first name:"
+        label-for="firstName"
+      >
+        <b-form-input
+          id="firstName"
+          type="text"
+        ></b-form-input>
+      </b-form-group>
+
+            <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="last name:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          type="text"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          type="email"
+          v-model="$v.form.email.$model"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Email is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-else-if="!$v.form.email.email"
+        >
+          please enter a valid email
+        </b-form-invalid-feedback>
+      </b-form-group>
+
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -166,7 +212,12 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email:{
+        required,
+        email
       }
+
     }
   },
   mounted() {
@@ -183,11 +234,15 @@ export default {
       try {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
-          this.$root.store.server_domain + "/Register",
+          "http://localhost:3000/Register",
 
           {
             username: this.form.username,
-            password: this.form.password
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
+            password: this.form.password,
+            email: this.form.email,
           }
         );
         this.$router.push("/login");

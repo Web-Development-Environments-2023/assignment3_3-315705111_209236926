@@ -2,19 +2,24 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
+import VueCookies from "vue-cookies";
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
 });
+axios.defaults.withCredentials=true;
+
 
 import Vuelidate from "vuelidate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import {
   FormGroupPlugin,
+  FormCheckboxPlugin,
+  FormTextareaPlugin,
+  ModalPlugin,
   FormPlugin,
   FormInputPlugin,
   ButtonPlugin,
@@ -24,9 +29,13 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  SpinnerPlugin
 } from "bootstrap-vue";
 [
   FormGroupPlugin,
+  FormCheckboxPlugin,
+  FormTextareaPlugin,
+  ModalPlugin,
   FormPlugin,
   FormInputPlugin,
   ButtonPlugin,
@@ -36,6 +45,7 @@ import {
   AlertPlugin,
   ToastPlugin,
   LayoutPlugin,
+  SpinnerPlugin
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
@@ -65,6 +75,7 @@ axios.interceptors.response.use(
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
+Vue.use(VueCookies);
 
 const shared_data = {
   username: localStorage.username,

@@ -1,6 +1,7 @@
 import Main from "./pages/MainPage";
 import NotFound from "./pages/NotFoundPage";
 
+
 const routes = [
   {
     path: "/",
@@ -26,6 +27,31 @@ const routes = [
     path: "/recipe/:recipeId",
     name: "recipe",
     component: () => import("./pages/RecipeViewPage"),
+  },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: () => import("./pages/FavoriteRecipes"),
+  },
+  {
+    path: "/own",
+    name: "own",
+    component: () => import("./pages/OwnRecipes"),
+  },
+  {
+    path: "/own/:recipeId",
+    name: "ownrec",
+    component: () => import("./pages/OwnRecipeView"),
+  },
+  {
+    path: "/family",
+    name: "family",
+    component: () => import("./pages/FamilyRecipePage"),
+  },
+  {
+    path: "/About",
+    name: "about",
+    component: () => import("./pages/About"),
   },
   {
     path: "*",
